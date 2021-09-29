@@ -2,7 +2,7 @@
 
 namespace maestroerror\Traits;
 
-trait send_mail {
+trait mail {
  // connection func
  public function send_mail($to, $subject, $body, $frname, $fremail) {
 
