@@ -268,6 +268,23 @@ trait filesProcessing {
           }
         }
       }
+
+      protected function isGDResource($file) {
+        if(gettype($file) == 'object') {
+          if (get_class($file) === "GdImage") {
+            return TRUE;
+          } else {
+            return FALSE;
+          }
+        }
+      }
+      protected function isImagePath($file) {
+        return $this->check_if_image($file, 1);
+      }
+
+      protected function getFullPath($file) {
+        return realpath($file);
+      }
       
 }
 
