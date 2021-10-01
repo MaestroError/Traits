@@ -143,7 +143,7 @@ trait filesProcessing {
           }
     
           /* Checks if the image isn't to large */
-          protected function getByteSizeFromStr($string){
+          public function getByteSizeFromStr($string){
               $size_conf = substr($string, -1);
               $max_size = (int)substr($string, 0, -1);
     
@@ -166,24 +166,27 @@ trait filesProcessing {
     
           /* Re-arranges the $_FILES array */
           protected function reArrayFiles($files){
-              $file_ary = array();
-    
-          if (!empty($files['name'][0])) {
-            if (is_array($files['name'])) {
-              $file_count = count($files['name']);
-            } else {
-              $file_count = 1;
-            }
+            $file_ary = array();
+            if (!empty($files['name'][0])) {
+                if (is_array($files['name'])) {
+                    $file_count = count($files['name']);
+                } else {
+                    $file_count = 1;
+                }
                 $file_keys = array_keys($files);
     
                 for ($i=0; $i<$file_count; $i++) {
                     foreach ($file_keys as $key) {
-                        $file_ary[$i][$key] = $files[$key][$i];
+                        if(is_array($files[$key])) {
+                            $file_ary[$i][$key] = $files[$key][$i];
+                        } else {
+                            $file_ary[$i][$key] = $files[$key];
+                        }
                     }
                 }
-          }
+            }
     
-              return $file_ary;
+            return $file_ary;
           }
     
     

@@ -5,6 +5,15 @@ trait staticHelpers {
 
     /* STRINGS */
 
+    static function get_string_between($string, $start, $end){
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
+    }
+
     // string ends with
     static function endsWith( $haystack, $needle ) {
         $length = strlen( $needle );
@@ -94,7 +103,7 @@ trait staticHelpers {
     }
     
 
-    // Refactor php $_FILES array
+    // Refactor php $_FILES array's some key (like "images"), when uploading multiple files
     static function refactorFiles($files){
         $file_ary = array();
 
